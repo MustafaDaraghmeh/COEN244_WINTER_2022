@@ -3,7 +3,6 @@
 //
 #include <iostream>
 using namespace std;
-
 class Point{
 private:
     int x;
@@ -33,26 +32,30 @@ public:
         return this->y;
     }
     void print(){
-        cout<<"Point("<<x<<", "<<y<<")"<<endl;
+        cout<<"Point("<<x<<", "<<y<<")";
     }
 };
-//
+
 int main(){
-    int size =10;
-    Point *p1 = new Point[size];
-    for(int i=0; i<size;i++){
-        p1[i].set_x(i+3);
-        p1[i].set_y(i*3);
-    }
+    int col_num=10;
+    Point x [100];  // 10*10
 
-    for(int i=0; i<size;i++){
-        p1->print();
-        p1++;
-    }
+//    for(int row=0; row < 10; row++) {
+//        for (int col = 0; col < 10; col++) {
+//            x[row * col_num + col] = 0;
+//        }
+//    }
 
-    for(int i=0; i<size;i++){
-        p1[i].print();
+    int index_c=9;
+    int index_r=9;
+    x[index_r * col_num + index_c].set_x(10);
+    x[index_r * col_num + index_c].set_y(10);
+//    x[index_r * col_num + index_c].print();
+    cout<<endl;
+    for(int r=0; r<10; r++){
+        for (int c=0;c<10;c++) {
+            x[r * col_num + c].print(); cout<< " ";
+        }
+        cout<<endl;
     }
-
-    return 0;
 }
