@@ -10,11 +10,23 @@ class Point{
 private:
     int x;
     int y;
+    char* point_name;
+    char * get_string(int size=10){
+        char* ptr = new char[size];
+        for(int i=0;i<size; i++)
+            ptr[i]=' ';
+        ptr[size-1] ='0';
+
+        return ptr;
+    }
 public:
     static int count_objects;
-
-    Point(): Point(0,0){}
-    Point(int x, int y): y(y), x(x){Point::count_objects++;}
+    Point(): Point(0,0, " "){}
+    Point(int x, int y, const char* p_name): y(y), x(x){
+        Point::count_objects++;
+        point_name = Point::get_string(255);
+        strcpy(point_name, p_name);
+    }
 
     bool set_x(int x){
         if (x >= 0) {
@@ -41,6 +53,18 @@ public:
     }
     static int get_object_count(){
         return Point::count_objects;
+    }
+
+    void print_point_name(){
+        int i=0;
+        while (point_name[i] != '\0'){
+            cout<<point_name[i];
+            i++;
+        }
+        cout<<endl;
+    }
+    ~Point(){
+        delete [] point_name;
     }
 };
 
@@ -89,6 +113,8 @@ int main(){
     //    https://en.cppreference.com/w/c/string/byte/strcpy
     print_char(ptr_char);
 
+    Point p100(22,34, "Test\0");
+    p100.print_point_name();
 
     cout<<"Total objects created:"<< Point::get_object_count()<<endl;
 
