@@ -5,11 +5,9 @@
 #include <cstring>
 
 using namespace std;
-
-class Point{
+class Info{
 private:
-    int x;
-    int y;
+    int id;
     char* point_name;
     char * get_string(int size=10){
         char* ptr = new char[size];
@@ -20,12 +18,40 @@ private:
         return ptr;
     }
 public:
+    Info(): Info(0,""){}
+    Info(int id, const char* p_name){
+        this->id =id;
+        point_name = get_string(255);
+        strcpy(point_name, p_name);
+    }
+
+    void print_point_name(){
+        int i=0;
+        while (point_name[i] != '\0'){
+            cout<<point_name[i];
+            i++;
+        }
+        cout<<endl;
+    }
+    ~Info(){
+        delete [] point_name;
+    }
+
+};
+
+class Point{
+private:
+    int x;
+    int y;
+
+
+public:
+    Info* point_info;
     static int count_objects;
     Point(): Point(0,0, " "){}
     Point(int x, int y, const char* p_name): y(y), x(x){
         Point::count_objects++;
-        point_name = Point::get_string(255);
-        strcpy(point_name, p_name);
+        point_info = new Info(count_objects, p_name);
     }
 
     bool set_x(int x){
@@ -55,16 +81,9 @@ public:
         return Point::count_objects;
     }
 
-    void print_point_name(){
-        int i=0;
-        while (point_name[i] != '\0'){
-            cout<<point_name[i];
-            i++;
-        }
-        cout<<endl;
-    }
+
     ~Point(){
-        delete [] point_name;
+        delete point_info;
     }
 };
 
@@ -114,7 +133,7 @@ int main(){
     print_char(ptr_char);
 
     Point p100(22,34, "Test\0");
-    p100.print_point_name();
+    p100.point_info->print_point_name();
 
     cout<<"Total objects created:"<< Point::get_object_count()<<endl;
 
