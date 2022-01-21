@@ -2,6 +2,7 @@
 // Created by musta on 2022-01-21.
 //
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -63,7 +64,7 @@ Point* get_array_of_points(int size=10){
 char * get_string(int size=10){
     char* ptr = new char[size];
     for(int i=0;i<size; i++)
-        ptr[i]=0;
+        ptr[i]=' ';
     ptr[size-1] ='0';
 
     return ptr;
@@ -71,7 +72,7 @@ char * get_string(int size=10){
 
 void print_char(char* ptr){
     int i=0;
-    while (ptr[i] != '0'){
+    while (ptr[i] != '\0'){
         cout<<ptr[i];
         i++;
     }
@@ -79,12 +80,17 @@ void print_char(char* ptr){
 }
 
 int main(){
-    char* ptr_char= get_string(10);
-    ptr_char[0]='A';
-    ptr_char[1]='B';
-    print_char(ptr_char);
-    cout<<"Total objects created:"<< Point::get_object_count()<<endl;
 
+    char* ptr_char= get_string(10);
+//    ptr_char[0]='A';
+//    ptr_char[1]='B';
+
+    strcpy(ptr_char, "Mustafa Daraghmeh\0");
+    //    https://en.cppreference.com/w/c/string/byte/strcpy
+    print_char(ptr_char);
+
+
+    cout<<"Total objects created:"<< Point::get_object_count()<<endl;
 
     Point p1;
     cout<<"Total objects created:"<< p1.get_object_count()<<endl;
