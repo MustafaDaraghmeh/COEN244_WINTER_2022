@@ -42,6 +42,31 @@ int main(){
     for(int i=0; i<size; i++)
         cout<<"*(prt_int_array + "<<i<<")= "<<*(prt_int_array + i)<<"\r";
     cout<<endl;
+    delete ptr_int;
+    delete [] prt_int_array;
+    prt_int_array= nullptr;
+    ptr_int= nullptr;
 
+    prt_int_array = new int[100]; // we need to access 1D array using 2D array indexes
+    for(int i=0;i<100;i++)
+        prt_int_array[i]=i;
+
+    // Mapping 1D[100] to 2d[10][10] array,
+    int column_number = 10;
+
+    int row_index= 9; //rows [0 - 9]
+    int column_index= 9;// columns [0 - 9]
+
+    index = row_index * column_number + column_index; //it returns the single index, by using two indexes
+    prt_int_array[index]=-10;
+
+    cout<<"prt_int_array[row_index * column_number + column_index] = "<<prt_int_array[index]<<endl;
+
+    for(int row=0; row < 10; row++){
+        for(int column=0; column < 10; column++){
+            cout<<prt_int_array[row * column_number + column]<< " ";
+        }
+        cout<<endl;
+    }
     return 0;
 }
