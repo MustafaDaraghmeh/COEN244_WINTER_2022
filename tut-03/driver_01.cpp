@@ -12,6 +12,8 @@ using std::endl;
 class Account {
 
 public:
+    int id;
+    static int count;
     Account();
     Account(double, const char*);
     Account(const Account&);
@@ -28,10 +30,14 @@ private:
     int age;
     char* address;
 };
+//
+int Account::count=0;
+
 Account::Account() {
     cout << "Constructor Account() is called" << endl;
     balance = 0.0;
     owner = nullptr;
+    id=0;
 }
 
 Account::Account(double b, const char* ow) {
@@ -39,13 +45,18 @@ Account::Account(double b, const char* ow) {
     balance = b;
     owner = new char[strlen(ow)+1];
     strcpy(owner, ow);
+    count++;
+    id=count;
 }
 
 Account::Account(const Account& a) {
     cout << "Copy Constructor Account(const Account&) is called" << endl;
     balance = a.getBalance();
     owner = new char[strlen(a.getOwner())+1];
-    strcpy(owner, a.getOwner());
+//    strcpy(owner, a.getOwner());
+    strcpy_s(owner, strlen(a.getOwner())+1 ,a.getOwner());
+    count++;
+    id=count;
 }
 
 char* Account::getOwner() const{
@@ -69,7 +80,7 @@ Account::~Account() {
 }
 
 int main() {
-
+    std::cout<<Account::count<<endl;
     cout << "Example 1.............." << endl;
     Account *a1 = new Account();
     cout << a1->getBalance() << endl;
@@ -86,7 +97,7 @@ int main() {
     cout << a3->getBalance() << endl;
     cout << a3->getOwner() << endl;
     cout << endl;
-
+    std::cout<<Account::count<<endl;
     cout <<"Example 4.............." << endl;
     delete a2;
     cout << a3->getOwner() << endl;

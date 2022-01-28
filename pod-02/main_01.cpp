@@ -93,6 +93,7 @@ public:
 
     ~Point(){
         delete point_info;
+//        delete [] data_arr;
     }
 };
 
