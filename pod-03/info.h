@@ -9,6 +9,7 @@
 #include "date.h"
 
 class info {
+
 date* date_ptr;
 date* date_ptr_arr;
 public:

@@ -3,109 +3,15 @@
 //
 
 #include <iostream>
-#include <stdio.h>
-#include <string.h>
+#include "Account.h"
+#include "manager.h"
 
 using std::cout;
 using std::endl;
 
-class Account {
-
-public:
-    int id;
-    static int count;
-    Account();
-    Account(double, const char*, int, const char*);
-    Account(const Account&);
-
-    int getBalance() const;
-    void setBalance(double);
-    char* getOwner() const;
-    void setOwner(char* ow);
-    ~Account();
-
-    int getAge() const;
-
-    char *getAddress() const;
-
-private:
-    double balance;
-    char* owner;
-    int age;
-    char* address;
-};
-//
-int Account::count=0;
-
-Account::Account() {
-    cout << "Constructor Account() is called" << endl;
-    balance = 0.0;
-    owner = nullptr;
-    id=0;
-    address= nullptr;
-    age=0;
-}
-
-Account::Account(double b, const char* ow, int age, const char* address) {
-    cout << "Constructor Account(double, char*) is called" << endl;
-    balance = b;
-    owner = new char[strlen(ow)+1];
-    strcpy(owner, ow);
-    count++;
-    id=count;
-    this->age=age;
-
-    this->address = new char[strlen(address)+1];
-    strcpy(this->address, address);
-
-}
-
-Account::Account(const Account& other) {
-    cout << "Copy Constructor Account(const Account&) is called" << endl;
-    balance = other.getBalance();
-    owner = new char[strlen(other.getOwner()) + 1];
-//    strcpy(owner, other.getOwner());
-    strcpy_s(owner, strlen(other.getOwner()) + 1 , other.getOwner());
-    count++;
-    id=count;
-
-    this->age=other.getAge();
-
-    this->address = new char[strlen(other.getAddress())+1];
-    strcpy(this->address, other.getAddress());
-
-}
-
-char* Account::getOwner() const{
-    return owner;
-}
-void Account::setOwner(char* ow) {
-    owner = new char[strlen(ow)+1];
-    strcpy(owner, ow);
-//    strcpy_s(owner,strlen(ow)+1, ow);
-}
-
-int Account::getBalance() const {
-    return balance;
-}
-
-void Account::setBalance(double b) {
-    balance = b;
-}
-
-Account::~Account() {
-    delete [] owner;
-}
-
-int Account::getAge() const{
-    return this->age;
-}
-
-char *Account::getAddress() const {
-    return this->address;
-}
 
 int main() {
+    Extra_data* d =new Extra_data();
     std::cout<<Account::count<<endl;
     cout << "Example 1.............." << endl;
     Account *a1 = new Account();
@@ -130,4 +36,12 @@ Account* a3 = new Account(*a2);
     cout <<"Example 4.............." << endl;
     delete a2;
     cout << a3->getOwner() << endl;
+
+
+    Account* accounts= new Account[100];
+    accounts[0]=*new Account(500, "John\0", 25, "ca\0");
+
+
+    manager* man = new manager();
+    man->add_account(new Account());
 }
