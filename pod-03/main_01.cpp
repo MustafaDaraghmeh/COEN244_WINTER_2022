@@ -6,7 +6,7 @@
 
 int main(){
     Time* t =new Time();
-    info* info_ptr = new info(new date(1, t));
+    info* info_ptr = new info(new date(1, t), 100);
 
     //    date* d1 = new date();
     //    d1->get_day();

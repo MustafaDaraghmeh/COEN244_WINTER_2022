@@ -10,10 +10,11 @@
 
 class info {
 date* date_ptr;
+date* date_ptr_arr;
 public:
     info();
     ~info();
-    info(date *pDate);
+    info(date *pDate, const int size);
 };
 
 
