@@ -49,12 +49,12 @@ Account::Account(double b, const char* ow) {
     id=count;
 }
 
-Account::Account(const Account& a) {
+Account::Account(const Account& other) {
     cout << "Copy Constructor Account(const Account&) is called" << endl;
-    balance = a.getBalance();
-    owner = new char[strlen(a.getOwner())+1];
-//    strcpy(owner, a.getOwner());
-    strcpy_s(owner, strlen(a.getOwner())+1 ,a.getOwner());
+    balance = other.getBalance();
+    owner = new char[strlen(other.getOwner()) + 1];
+//    strcpy(owner, other.getOwner());
+    strcpy_s(owner, strlen(other.getOwner()) + 1 , other.getOwner());
     count++;
     id=count;
 }
@@ -65,6 +65,7 @@ char* Account::getOwner() const{
 void Account::setOwner(char* ow) {
     owner = new char[strlen(ow)+1];
     strcpy(owner, ow);
+//    strcpy_s(owner,strlen(ow)+1, ow);
 }
 
 int Account::getBalance() const {
@@ -93,7 +94,8 @@ int main() {
     cout << endl;
 
     cout <<"Example 3.............." << endl;
-    Account* a3 = new Account(*a2);
+Account* a3 = new Account(*a2);
+//    Account* a3 = a2;
     cout << a3->getBalance() << endl;
     cout << a3->getOwner() << endl;
     cout << endl;
