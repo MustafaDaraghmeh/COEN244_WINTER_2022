@@ -44,4 +44,8 @@ Account* a3 = new Account(*a2);
 
     manager* man = new manager();
     man->add_account(new Account());
+    man->add_account(new Account());
+    man->add_account(new Account());
+    man->add_account(new Account());
+    man->add_account(new Account(500, "John\0", 25, "ca\0"));
 }
